@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/giphyviz/static/css/main.97f9e3b5.chunk.css",
-    "main.js": "/giphyviz/static/js/main.c383bce8.chunk.js",
-    "main.js.map": "/giphyviz/static/js/main.c383bce8.chunk.js.map",
+    "main.css": "/giphyviz/static/css/main.6b869dcd.chunk.css",
+    "main.js": "/giphyviz/static/js/main.d0f14f19.chunk.js",
+    "main.js.map": "/giphyviz/static/js/main.d0f14f19.chunk.js.map",
     "runtime~main.js": "/giphyviz/static/js/runtime~main.28133c52.js",
     "runtime~main.js.map": "/giphyviz/static/js/runtime~main.28133c52.js.map",
-    "static/js/2.959503a9.chunk.js": "/giphyviz/static/js/2.959503a9.chunk.js",
-    "static/js/2.959503a9.chunk.js.map": "/giphyviz/static/js/2.959503a9.chunk.js.map",
+    "static/js/2.001dbe1a.chunk.js": "/giphyviz/static/js/2.001dbe1a.chunk.js",
+    "static/js/2.001dbe1a.chunk.js.map": "/giphyviz/static/js/2.001dbe1a.chunk.js.map",
     "index.html": "/giphyviz/index.html",
-    "precache-manifest.62776d6c23a073bb27c4454403550c17.js": "/giphyviz/precache-manifest.62776d6c23a073bb27c4454403550c17.js",
+    "precache-manifest.6aa4c793818413f547bae8f09c3d1557.js": "/giphyviz/precache-manifest.6aa4c793818413f547bae8f09c3d1557.js",
     "service-worker.js": "/giphyviz/service-worker.js",
-    "static/css/main.97f9e3b5.chunk.css.map": "/giphyviz/static/css/main.97f9e3b5.chunk.css.map"
+    "static/css/main.6b869dcd.chunk.css.map": "/giphyviz/static/css/main.6b869dcd.chunk.css.map"
   }
 }
