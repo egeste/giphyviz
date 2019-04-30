@@ -4,15 +4,15 @@ import debounce from 'lodash/debounce'
 
 import { scaleLinear, scaleQuantize } from 'd3-scale'
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 
 import {
+  Card,
   Form,
-  Image,
   Navbar,
   Spinner,
-  Container,
-  InputGroup
+  InputGroup,
+  Container, Row, Col
 } from 'react-bootstrap'
 
 import Cube from './components/Cube'
@@ -26,14 +26,15 @@ const DEFAULT_FILTER = {
 
 const frequencyZoomScalar = scaleLinear()
   .domain([ 0, 255 ])
-  .range([ 5, -2 ])
+  .range([ 5, 0 ])
 
 export default class App extends PureComponent {
 
   state = {
-    mp3: 'https://cf-media.sndcdn.com/nPYUVOW2Guoe?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLW1lZGlhLnNuZGNkbi5jb20vblBZVVZPVzJHdW9lIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNTU2NTg5Nzc5fX19XX0_&Signature=gWq7ZKOur0JOsiK1iVS~RtNTDOLuV1lWnC1kp8G4mfSiVBMH0RZvVdOexu0WqfQ15nZcTI2xRTgYz50cRts3BW-Dtzvgk3LAIT1QIorFMRDMegAkfvKQfImPJiA5~Am~yIZgeXcsBtNstersRWAdj3-9Y01lCV7Z~ul50OxzlRoOrmmAK9MuImHe-jXVNCbUKKOK8OfsgZHAXHJStREC~TjAYGD-wPY5kFX9DCbATP-gsjcPUdLhKp8sM4qVkdTpY51ANGdAYz9V5aBOmaccS9v6sKvXE5RbEMRyL~L2sAY0~fDBXOTrmJC~q6B0T6OSmwaDP70QYktUY-zszK~YbQ__&Key-Pair-Id=APKAJAGZ7VMH2PFPW6UQ',
+    mp3: 'http://51.15.76.3:80/pulstranceHD.mp3',
     gifs: [],
     term: 'acid',
+    gifCount: 50,
     loadingMusic: false,
     loadingVideos: false,
     searchingGiphy: false,
@@ -48,9 +49,13 @@ export default class App extends PureComponent {
     this.setState({ term: target.value }, this.onSearchGiphy)
   }
 
+  onChangeMP3 = debounce(({ target }) => {
+    this.setState({ mp3: target.value })
+  }, 1000)
+
   onSearchGiphy = debounce(() => {
     this.setState({ searchingGiphy: true })
-    const filter = { q: this.state.term, ...DEFAULT_FILTER }
+    const filter = { ...DEFAULT_FILTER, q: this.state.term, limit: this.state.gifCount }
     return fetch(`https://api.giphy.com/v1/gifs/search?${qs.stringify(filter)}`)
       .then(response => response.json())
       .then(({ data }) => this.setState({ gifs: data, searchingGiphy: false }, this.onPreloadVideos))
@@ -71,74 +76,100 @@ export default class App extends PureComponent {
   }
 
   renderFrequencyData = freqs => {
-    if (!this.state.gifs.length) return null
     if (this.state.searchingGiphy) return null
     if (this.state.loadingVideos) return null
+    if (!this.state.gifs.length) return null
 
     const averageAmplitude = freqs.reduce(((memo, freq) => memo + freq), 0) / freqs.length
-    const amplitudeGif = scaleQuantize().domain([0,255]).range(this.state.gifs)(averageAmplitude)
-    console.log(amplitudeGif.images)
+    const highestAmplitudeIndex = freqs.indexOf(([ ...freqs ].sort()[0]))
 
+    console.log(highestAmplitudeIndex)
+
+    const amplitudeGif = scaleQuantize().domain([ 0, freqs.length ]).range(this.state.gifs)(highestAmplitudeIndex)
     const zoom = frequencyZoomScalar(averageAmplitude)
     return (
-      <Container style={ { position: 'relative' } }>
-        <img src={ `${amplitudeGif.images.original.url}` } style={ {
-          position: 'absolute',
-          width: '100%',
-          height: '60vh',
-          zIndex: -1,
-          objectFit: 'fill'
-        } } />
-      </Container>
+      <div style={ { position: 'relative' } }>
+        <img src={ `${amplitudeGif.images.original.url}` }
+          style={ { position: 'absolute', width: '100%', height: '60vh', zIndex: -1, objectFit: 'fill' } }
+        />
+        {/*
+        <Cube zoom={ zoom } style={ { width: '100%', height: '60vh' } } />
+        */}
+      </div>
     )
   }
 
   render() {
     return (
-      <div>
+      <Fragment>
 
         <Navbar bg="dark" variant="dark" expand="sm">
           <Navbar.Brand to="/" children="giphyviz" />
           <Navbar.Toggle />
-          <Form inline>
-            <InputGroup className="mb-3">
-              <Form.Control type="text"
-                value={ this.state.term }
-                placeholder="Search"
-                onChange={ this.onChangeSearch }
-              />
-              { this.state.searchingGiphy ? (
-                <InputGroup.Append>
-                  <InputGroup.Text>
-                    <Spinner animation="border" size="sm" />
-                  </InputGroup.Text>
-                </InputGroup.Append>
-              ) : (
-                <InputGroup.Append>
-
-                </InputGroup.Append>
-              ) }
-            </InputGroup>
-          </Form>
         </Navbar>
 
-        <AudioVisualiser src={ this.state.mp3 }
-          renderFrequencyData={ this.renderFrequencyData }
-        />
+        <Container>
+          <Row>
+            <Col xs={ 3 }>
+              <Card>
+                <Card.Body>
+                  <Form>
 
-        { this.state.searchingGiphy ? (
-          <div style={ { textAlign: 'center' } }>
-            <Spinner animation="grow" />
-            <p children="Searching giphy..." />
-          </div>
-        ) : this.state.loadingVideos ? (
-          <div style={ { textAlign: 'center' } }>
-            <Spinner animation="grow" />
-            <p children="Loading giphy results..." />
-          </div>
-        ) : null }
+                    <Form.Group>
+                      <Form.Label children="Audio Source" />
+                      <Form.Control type="text"
+                        value={ this.state.mp3 }
+                        placeholder="http://someurl.com/file.mp3"
+                        onChange={ this.onChangeMP3 }
+                      />
+                    </Form.Group>
 
-      </div>
+                    <Form.Group>
+                      <Form.Label children="Giphy Search Term" />
+                      <InputGroup>
+                        <Form.Control type="text"
+                          value={ this.state.term }
+                          placeholder="Search"
+                          onChange={ this.onChangeSearch }
+                        />
+                        { this.state.searchingGiphy ? (
+                          <InputGroup.Append>
+                            <InputGroup.Text>
+                              <Spinner animation="border" size="sm" />
+                            </InputGroup.Text>
+                          </InputGroup.Append>
+                        ) : null }
+                      </InputGroup>
+                    </Form.Group>
+
+                  </Form>
+                </Card.Body>
+              </Card>
+            </Col>
+
+            <Col xs={ 9 }>
+              <AudioVisualiser autoPlay
+                src={ this.state.mp3 }
+                style={ { width: '100%' } }
+                renderFrequencyData={ this.renderFrequencyData }
+              />
+
+              { this.state.searchingGiphy ? (
+                <div style={ { textAlign: 'center' } }>
+                  <Spinner animation="grow" />
+                  <p children="Searching giphy..." />
+                </div>
+              ) : this.state.loadingVideos ? (
+                <div style={ { textAlign: 'center' } }>
+                  <Spinner animation="grow" />
+                  <p children={ `Loading ${this.state.gifCount} giphy results...` } />
+                </div>
+              ) : null }
+            </Col>
+          </Row>
+        </Container>
+
+      </Fragment>
     )
   }
 

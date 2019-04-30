@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import AudioAnalyser from './AudioAnalyser'
@@ -15,13 +15,10 @@ export default class AudioVisualiser extends PureComponent {
 
   render() {
     return (
-      <div>
-        <AudioAnalyser src={ this.props.src }
-          onFrequencyData={ this.onFrequencyData }
-          style={ { width: '100%' } }
-        />
+      <Fragment>
+        <AudioAnalyser { ...this.props } onFrequencyData={ this.onFrequencyData } />
         { this.props.renderFrequencyData([ ...this.state.frequencyData ]) }
-      </div>
+      </Fragment>
     )
   }
 

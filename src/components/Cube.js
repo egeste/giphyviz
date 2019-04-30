@@ -1,5 +1,8 @@
-import React, { PureComponent } from 'react'
+import omit from 'lodash/omit'
 import * as THREE from 'three'
+
+import React, { PureComponent } from 'react'
+
 
 export default class Scene extends PureComponent {
 
@@ -58,7 +61,8 @@ export default class Scene extends PureComponent {
   onRef = mount => this.mount = mount
 
   render() {
-    const { ...otherProps } = this.props
-    return (<div { ...otherProps } ref={ this.onRef } />)
+    return (
+      <div { ...omit(this.props, 'zoom') } ref={ this.onRef } />
+    )
   }
 }
