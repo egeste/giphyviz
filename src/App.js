@@ -31,10 +31,9 @@ const frequencyZoomScalar = scaleLinear()
 export default class App extends PureComponent {
 
   state = {
+    mp3: 'https://cf-media.sndcdn.com/nPYUVOW2Guoe?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLW1lZGlhLnNuZGNkbi5jb20vblBZVVZPVzJHdW9lIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNTU2NTg5Nzc5fX19XX0_&Signature=gWq7ZKOur0JOsiK1iVS~RtNTDOLuV1lWnC1kp8G4mfSiVBMH0RZvVdOexu0WqfQ15nZcTI2xRTgYz50cRts3BW-Dtzvgk3LAIT1QIorFMRDMegAkfvKQfImPJiA5~Am~yIZgeXcsBtNstersRWAdj3-9Y01lCV7Z~ul50OxzlRoOrmmAK9MuImHe-jXVNCbUKKOK8OfsgZHAXHJStREC~TjAYGD-wPY5kFX9DCbATP-gsjcPUdLhKp8sM4qVkdTpY51ANGdAYz9V5aBOmaccS9v6sKvXE5RbEMRyL~L2sAY0~fDBXOTrmJC~q6B0T6OSmwaDP70QYktUY-zszK~YbQ__&Key-Pair-Id=APKAJAGZ7VMH2PFPW6UQ',
     gifs: [],
     term: 'acid',
-    count: 20,
-    // averages: [],
     loadingMusic: false,
     loadingVideos: false,
     searchingGiphy: false,
@@ -123,7 +122,7 @@ export default class App extends PureComponent {
           </Form>
         </Navbar>
 
-        <AudioVisualiser src="/audio/thriller.mp3"
+        <AudioVisualiser src={ this.state.mp3 }
           renderFrequencyData={ this.renderFrequencyData }
         />
 
