@@ -2,7 +2,7 @@
   "name": "giphyviz",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://egeste.github.io/giphyviz",
+  "homepage" : "https://egeste.github.io/giphyviz/build",
   "dependencies": {
     "d3-scale": "^3.0.0",
     "isomorphic-fetch": "^2.2.1",
