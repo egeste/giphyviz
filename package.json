@@ -3,9 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "d3-scale": "^3.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.11",
+    "qs": "^6.7.0",
     "react": "^16.8.6",
+    "react-audio-player": "^0.11.0",
+    "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0"
+    "react-scripts": "3.0.0",
+    "three": "^0.104.0"
   },
   "scripts": {
     "start": "react-scripts start",
