@@ -2,7 +2,7 @@
   "name": "giphyviz",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://egeste.github.io/giphyviz",
+  "homepage": "https://egeste.net/giphyviz",
   "dependencies": {
     "d3-scale": "^3.0.0",
     "isomorphic-fetch": "^2.2.1",
@@ -37,5 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
   }
 }
