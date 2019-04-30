@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.97f9e3b5.chunk.css",
-    "main.js": "/static/js/main.e001a230.chunk.js",
-    "main.js.map": "/static/js/main.e001a230.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/js/2.959503a9.chunk.js": "/static/js/2.959503a9.chunk.js",
-    "static/js/2.959503a9.chunk.js.map": "/static/js/2.959503a9.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.69a156ca14428b7279b2bca410de620e.js": "/precache-manifest.69a156ca14428b7279b2bca410de620e.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.97f9e3b5.chunk.css.map": "/static/css/main.97f9e3b5.chunk.css.map"
+    "main.css": "/giphyviz/static/css/main.97f9e3b5.chunk.css",
+    "main.js": "/giphyviz/static/js/main.e001a230.chunk.js",
+    "main.js.map": "/giphyviz/static/js/main.e001a230.chunk.js.map",
+    "runtime~main.js": "/giphyviz/static/js/runtime~main.28133c52.js",
+    "runtime~main.js.map": "/giphyviz/static/js/runtime~main.28133c52.js.map",
+    "static/js/2.959503a9.chunk.js": "/giphyviz/static/js/2.959503a9.chunk.js",
+    "static/js/2.959503a9.chunk.js.map": "/giphyviz/static/js/2.959503a9.chunk.js.map",
+    "index.html": "/giphyviz/index.html",
+    "precache-manifest.df8e7f0b7dd0ffa477815fc535294f0e.js": "/giphyviz/precache-manifest.df8e7f0b7dd0ffa477815fc535294f0e.js",
+    "service-worker.js": "/giphyviz/service-worker.js",
+    "static/css/main.97f9e3b5.chunk.css.map": "/giphyviz/static/css/main.97f9e3b5.chunk.css.map"
   }
 }
